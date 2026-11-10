@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A fictional enterprise sales simulation for a Recorded Future Account Director work sample.">
+<title>CTI Value Engine | Madhu Poonacha</title>
+<style>
+:root{color-scheme:dark;--bg:#0b101c;--panel:#131d2e;--line:#33445d;--ink:#eef4fc;--muted:#afbed2;--mint:#71e8cb;--orange:#ffd09b;--red:#ffa3aa}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 88% 0,#203653,transparent 48%),var(--bg);color:var(--ink);font:15px/1.5 system-ui,sans-serif}main{max-width:1250px;margin:auto;padding:24px clamp(14px,4vw,52px) 36px}header,footer,.row,.controls{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:9px}.brand{font-weight:800;letter-spacing:.08em}.mark{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:7px;margin-right:8px;background:var(--mint);color:#0c2024}.label{color:var(--mint);font-size:.72rem;font-weight:750;letter-spacing:.12em;text-transform:uppercase}.tag{border:1px solid var(--line);color:var(--muted);border-radius:20px;padding:4px 9px;font-size:.75rem}.hero{padding:30px 0 18px}.hero h1{font-size:clamp(2.5rem,7vw,5.1rem);line-height:.98;letter-spacing:-.075em;margin:7px 0 12px}.hero p{max-width:730px}.muted,small{color:var(--muted)}p,h2,h3{margin:0 0 8px}h2{font-size:clamp(1.35rem,2.5vw,1.9rem);letter-spacing:-.03em;line-height:1.17}h3{font-size:1.02rem}.panel,.controls,.stage,.metric{background:var(--panel);border:1px solid var(--line);border-radius:13px}.controls,.stage{padding:11px}.actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap}button,select,input[type=number]{background:#1e2c43;color:var(--ink);border:1px solid #4b6380;border-radius:8px;padding:7px 10px;font:inherit;font-size:.84rem}button{font-weight:750;cursor:pointer}button.primary{background:var(--mint);color:#0a2429;border-color:transparent}button:disabled{opacity:.45;cursor:default}:focus-visible{outline:2px solid var(--mint);outline-offset:3px}.stage{margin:12px 0;display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.stage div{border-top:3px solid var(--line);padding:5px;color:var(--muted);font-size:.8rem}.stage .active{border-color:var(--mint);color:var(--ink);background:#203847}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.metric,.panel{padding:14px;min-width:0}.metric strong{display:block;font-size:clamp(1.18rem,2.6vw,1.8rem);letter-spacing:-.045em}.grid{display:grid;grid-template-columns:1.15fr 1fr;gap:11px;margin-top:11px}.wide{grid-column:1/-1}.warn{color:var(--orange)}.bad{color:var(--red)}.good{color:var(--mint)}.callout{border-left:3px solid var(--orange);background:#302a30;padding:9px 11px;margin-top:9px}.controls label,.fields label{font-size:.83rem;color:var(--muted)}.fields{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:10px 0}.fields label{display:block}.fields input[type=number],.fields select{display:block;width:100%}.fields input[type=range]{width:100%;accent-color:var(--mint)}.table{overflow:auto}table{border-collapse:collapse;width:100%;text-align:left}td,th{padding:6px;border-bottom:1px solid var(--line);font-size:.8rem;vertical-align:top}th{color:var(--muted)}.log{padding:0;list-style:none;max-height:235px;overflow:auto;margin:8px 0}.log li{border-top:1px solid var(--line);padding:7px 0}.log strong{color:var(--mint)}details{border-top:1px solid var(--line);padding-top:8px;margin-top:8px}summary{cursor:pointer;color:var(--mint)}pre{white-space:pre-wrap;overflow-wrap:anywhere;color:#dce9f8;background:#0c1423;padding:9px;border-radius:8px;font:13px/1.55 system-ui,sans-serif}footer{font-size:.75rem;color:var(--muted);margin-top:17px}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}@media(max-width:780px){.grid{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}}@media(max-width:470px){.stage{grid-template-columns:repeat(3,1fr)}.fields{grid-template-columns:1fr}}
+</style>
+</head>
+<body><main>
+<header><div class="brand"><span class="mark" aria-hidden="true">↗</span> ENTERPRISE SALES LAB</div><span class="tag">Independent candidate demo · Fictional deal</span></header>
+<section class="hero"><div class="label">Recorded Future · Account Director work sample</div><h1>CTI Value Engine</h1><p class="muted">From threat signal to defensible forecast. Follow Aurelia Global Financial Network from a synthetic identity-exposure signal through the proof of value, a procurement setback, and a gated expansion decision.</p></section>
+<div class="controls"><div class="actions"><button class="primary" id="play">▶ Play executive replay</button><button id="stress">Run stress test</button><button id="reset">Reset scenario</button></div><div class="actions"><button id="pause" disabled>Pause</button><button id="next" disabled>Next event</button><span id="status" class="tag">Ready</span></div></div>
+<div id="stages" class="stage" aria-label="Deal progression"></div>
+<section id="metrics" class="metrics" aria-label="Deal metrics"></section>
+<div class="sr" id="announce" role="status"></div>
+<div class="grid">
+<section class="panel" aria-label="Scenario"><div class="label">Active scene</div><h2 id="headline"></h2><p class="muted" id="story"></p><div id="gate"></div><details id="manual"><summary>Manual decisions</summary><div class="actions" id="actions"></div></details></section>
+<section class="panel"><div class="label">Deal desk</div><h2>Commercial model</h2><div class="fields">
+<label for="discount">Recurring concession <output id="discValue" for="discount"></output><input id="discount" type="range" min="0" max="30" step="1" value="0"></label>
+<label for="term">Contract term<select id="term"><option value="1">1 year</option><option value="2">2 years</option><option value="3" selected>3 years</option><option value="4">4 years</option><option value="5">5 years</option></select></label>
+</div><p class="muted" id="pricing"></p><details><summary>Fictional quota policy</summary><p class="muted">Credit equals first-year net recurring value upon signature. Services are excluded. The full credit is assigned to the modeled signature quarter. This is an illustrative plan for both modeled years.</p></details></section>
+<section class="panel"><div class="label">Qualification evidence</div><h2>MEDDPICC</h2><div class="table" id="evidence"></div></section>
+<section class="panel"><div class="label">Finance review</div><h2>Capacity vs. cash</h2><p class="muted">Illustrative annual assumptions. Released analyst capacity stays outside the cash calculation.</p><div class="fields">
+<label for="hours">Analyst hours released<input id="hours" type="number" min="0" max="1000000" step="1" value="1200"></label>
+<label for="cash">Validated annual cash benefit ($K)<input id="cash" type="number" min="0" max="1000000" step="1" value="650"></label>
+</div><div id="roi"></div><details><summary>Calculation assumptions</summary><p class="muted">Simple payback assumes recurring benefit and recurring subscription cost accrue evenly and services are paid upfront. First-year cash ROI compares annual cash benefit with annual recurring cost plus services. The illustration excludes incident-loss estimates and discounting.</p></details></section>
+<section class="panel"><div class="label">Event audit</div><h2>Forecast and decision log</h2><ul class="log" id="log"></ul></section>
+<section class="panel" id="post" hidden><div class="label">Day 91 · Post-sale</div><h2>Adoption before expansion</h2><div id="adoption"></div></section>
+<section class="panel wide"><div class="row"><h2>Executive decision memo</h2><div class="actions"><button id="download">Download memo</button><button id="audit">Download audit JSON</button></div></div><pre id="memo"></pre></section>
+</div>
+<footer><span>Madhu Poonacha · Enterprise Account Director work sample</span><span>Synthetic records only · No network queries, credentials, or outreach</span></footer>
+</main>
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const config = { list:500, services:150, term:3, dwell:5000, quarter:"Q4 FY26", next:"Q1 FY27" };
+const stages=["Source","Prove Value","Qualify / Negotiate","Forecast / Close","Day 91"];
+const fresh=()=>({stage:0,mode:"idle",date:"2026-11-10",stageText:"Aurelia enters the territory plan",story:"Choose the executive replay or the stress test. The scene, financial model, forecast and memo use one shared deal record.",
+ discovery:false,pov:false,buyer:false,buyerDate:null,champion:false,terms:"unreviewed",signatureWindow:false,windowDate:null,
+ approved:false,commitRequested:false,signed:false,signedDate:null,disqualified:false,connected:false,validated:false,sustained:false,brand:false,recovery:false,
+ quarter:config.quarter,discount:0,term:config.term,hours:1200,cash:650,seen:new Set(),audit:[],notice:""});
+let s=fresh(), timer, script=[], cursor=0, playing=false;
+const price=()=>({arr:config.list*(100-s.discount)/100,services:config.services});
+const money=n=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:0}).format(Math.round(n*1000));
+const age=(from,to)=>(Date.parse(to)-Date.parse(from))/86400000;
+const freshEvidence=(date,maxDays)=>Boolean(date)&&age(date,s.signedDate||s.date)>=0&&age(date,s.signedDate||s.date)<=maxDays;
+function gaps(){
+ const issues=[];
+ if(!s.discovery)issues.push("Customer-confirmed discovery");
+ if(!s.pov)issues.push("Customer-approved proof of value");
+ if(!s.buyer||!freshEvidence(s.buyerDate,30))issues.push("Current economic buyer approval");
+ if(!s.champion)issues.push("Confirmed champion");
+ if(s.terms!=="clear")issues.push("Material terms cleared by Legal");
+ if(!s.signatureWindow||!freshEvidence(s.windowDate,14))issues.push("Current procurement signature window");
+ if(!s.approved)issues.push("Commercial approval for current pricing and term");
+ return issues;
+}
+function forecast(){
+ if(s.signed)return "Closed Won";
+ if(s.disqualified)return "Disqualified";
+ if(!s.discovery)return "Unqualified";
+ if(s.commitRequested&&gaps().length===0)return "Commit";
+ return "Best Case";
+}
+function canExpand(){return s.signed&&s.connected&&s.validated&&s.sustained&&s.brand&&!s.recovery;}
+function describe(title,story,stage){s.stageText=title;s.story=story;s.stage=Math.max(s.stage,stage);}
+function apply(e){
+ const before=forecast(),oldQuarter=s.quarter;
+ if(s.seen.has(e.id)){
+  s.audit.push({date:s.date,event:e.id,owner:e.owner,before,after:before,quarterBefore:oldQuarter,quarterAfter:s.quarter,note:"Duplicate event ignored. No deal state changed."});
+  return;
+ }
+ s.seen.add(e.id);
+ if(e.date&&e.date<s.date){
+  s.audit.push({date:s.date,event:e.id,owner:e.owner,before,after:before,quarterBefore:oldQuarter,quarterAfter:s.quarter,note:"Out-of-order event ignored. No deal state changed."});
+  return;
+ }
+ if(e.date)s.date=e.date;
+ s.notice="";
+ let note=e.note;
+ const pricing=e.type==="price",benefit=e.type==="benefit";
+ const postSale=["connect","stall","validate","sustain","brand"].includes(e.type);
+ if((s.signed&&!postSale&&!benefit)||s.disqualified){
+  note="Deal is locked in "+before+". Reset to explore a different path.";
+ } else if(postSale&&!s.signed){
+  note="Day 91 is locked until a signed agreement is recorded.";
+ } else {
+  switch(e.type){
+   case "source":describe("From a signal to a reason to call","A fictional identity-exposure signal raises a discovery question. The partner introduction and outreach brief are drafts. Signal confidence and account relevance still need validation.",0);break;
+   case "discover":s.discovery=true;s.champion=true;describe("Aurelia confirms the workflow gap","Security Operations confirms slow case disposition and agrees to a proof of value. A named champion and next meeting establish a qualified opportunity.",1);break;
+   case "pov":s.pov=true;describe("Technical proof of value accepted","The SOC lead validates the fictional evidence: median time to disposition fell from 48 to 18 hours on the agreed test set. Finance still owns cash-benefit validation.",1);break;
+   case "buyer":s.buyer=true;s.buyerDate=s.date;describe("Economic buyer sign-off verified","The CISO confirms the outcome, funding and the named approval owner for the commercial decision.",2);break;
+   case "legal":s.terms="clear";describe("Legal approves the fallback terms","Legal approves the modeled liability language. Procurement timing is tracked as a separate requirement.",2);break;
+   case "window":s.signatureWindow=true;s.windowDate=s.date;describe("Procurement confirms the signature window","Procurement confirms the authorized signer and a dated window for "+s.quarter+". The Account Director updates the mutual action plan.",2);break;
+   case "approve":s.approved=true;describe("Deal Desk signs off on the offer","The current term and net recurring price are approved in this fictional deal. A pricing or term change invalidates this approval.",2);break;
+   case "commit":s.commitRequested=true;describe("Forecast review","Commit requires current buyer approval and signature timing, cleared material terms, approved pricing, and accepted technical value.",3);if(gaps().length)s.notice="Commit evidence gap · "+gaps().join(" · ");break;
+   case "redline":s.terms="redline";s.signatureWindow=false;s.windowDate=null;describe("The Commit evidence gap","Client Legal reopens material liability terms. Procurement withdraws the signature window. The deal leaves Commit while the Account Director coordinates the recovery plan.",3);s.notice="Open liability terms and unverified signature window. Route to Legal and reconfirm Procurement timing.";break;
+   case "concede":s.notice="Concession blocked. Legal must approve liability terms and Deal Desk must approve commercial changes.";note=s.notice;break;
+   case "slip":s.quarter=config.next;s.signatureWindow=false;s.windowDate=null;s.commitRequested=false;describe("Move the deal to next quarter","The technical proof still stands. The verified path to signature has slipped, so the deal moves out of the current-quarter commit.",3);break;
+   case "calendar":describe("New quarter opens","The simulated calendar advances. Reverify buyer and procurement evidence before recording a signature.",3);break;
+   case "best":s.commitRequested=false;describe("Best Case recorded","The Account Director removes the Commit request and keeps the open evidence gaps visible.",3);break;
+   case "disqualify":s.disqualified=true;describe("Disqualified","The buyer withdrew funding in this branch. Remove the opportunity from the active forecast and document the reason.",3);break;
+   case "price":{const old=s[e.field];s[e.field]=e.value;s.approved=false;note=(e.field==="discount"?"Recurring concession ":"Contract term ")+old+" → "+e.value+(e.field==="discount"?"%":" years")+". Previous commercial approval invalidated.";break;}
+   case "benefit":s[e.field]=e.value;break;
+   case "sign":{
+    const missing=gaps();
+    const [start,end]=s.quarter===config.next?["2027-01-01","2027-03-31"]:["2026-10-01","2026-12-31"];
+    if(s.date<start||s.date>end)missing.push("Signature date within the selected forecast quarter");
+    if(forecast()!=="Commit"||missing.length){
+     describe("Signature attempt blocked","The sales stage stays open. Resolve the required approvals and refresh the evidence before recording a synthetic signed agreement.",3);
+     s.notice="Forecast shift alert · "+(missing.length?missing.join(" · "):"Reconfirm the Commit decision");
+     note=s.notice;
+    }else{
+     s.signed=true;s.signedDate=s.date;
+     describe("Signed agreement recorded","A fictional signature event closes the deal. Quota credit is earned under the demo policy and Customer Success receives the agreed success criteria.",3);
+    }
+    break;
+   }
+   case "connect":s.connected=true;describe("Day 91 · Integration connected","Customer Success verifies the connection and confirms who owns the workflow. The second brand remains gated pending validated and sustained value.",4);break;
+   case "stall":s.recovery=true;s.sustained=false;s.brand=false;describe("Day 91 · Adoption recovery","The connection is live, but the SOC has not sustained the workflow. Assign a Customer Success recovery owner and a follow-up review before pitching expansion.",4);break;
+   case "validate":if(s.connected){s.validated=true;describe("Day 91 · First workflow outcome validated","Customer Success and the SOC lead validate the first end-to-end outcome against the handoff criteria.",4);}else note="Validate blocked: connect the integration first.";break;
+   case "sustain":if(s.validated){s.sustained=true;s.recovery=false;describe("Day 91 · Repeatable value evidenced","The SOC confirms the workflow is producing repeatable value across the modeled review period.",4);}else note="Sustained value blocked: first outcome remains unverified.";break;
+   case "brand":if(s.sustained&&!s.recovery){s.brand=true;describe("Day 91 · Second brand opportunity unlocked","A second brand sponsor confirms a related use case. Open a separate discovery opportunity with its own forecast and value case.",4);}else note="Expansion blocked: resolve the adoption gap and verify sustained value.";break;
+  }
+ }
+ s.audit.push({date:s.date,event:e.id,owner:e.owner,before,after:forecast(),quarterBefore:oldQuarter,quarterAfter:s.quarter,note});
+}
+const evt=(id,type,date,owner,note)=>({id,type,date,owner,note});
+const common=[
+ evt("SRC-01","source","2026-02-10","Account Director / Partner","Synthetic signal and account hypothesis added to territory plan."),
+ evt("DISC-01","discover","2026-03-12","Account Director / SOC lead","Customer agrees to proof of value and names a technical champion."),
+ evt("POV-01","pov","2026-08-18","Solutions Engineering / SOC lead","Customer approves the proof-of-value evidence."),
+ evt("BUY-01","buyer","2026-11-03","CISO","Buyer confirms funding and sponsorship."),
+ evt("LEG-01","legal","2026-11-05","Legal","Initial modeled terms approved."),
+ evt("WIN-01","window","2026-11-07","Procurement","Initial signature window documented."),
+ evt("DESK-01","approve","2026-11-08","Deal Desk","Modeled offer approved."),
+ evt("FC-01","commit","2026-11-09","Account Director","Evidence supports current-quarter Commit."),
+ evt("LEG-02","redline","2026-11-10","Client Legal / Procurement","Material terms reopened and signature window withdrawn."),
+ evt("SIGN-TEST","sign","2026-11-11","Account Director","Advance attempted before gates cleared.")
+];
+const executive=[
+ ...common,
+ evt("LEG-03","legal","2026-11-19","Legal","Approved fallback terms agreed in the scenario."),
+ evt("BUY-02","buyer","2026-11-23","CISO","Economic buyer sign-off refreshed."),
+ evt("WIN-02","window","2026-11-24","Procurement","Signature timing reconfirmed."),
+ evt("FC-02","commit","2026-11-25","Account Director","Commit restored with evidence."),
+ evt("SIGN-01","sign","2026-11-30","Authorized signer","Synthetic agreement signed."),
+ evt("ADOPT-01","connect","2027-03-01","Customer Success","Day 91 readiness review confirms integration connected."),
+ evt("ADOPT-02","validate","2027-03-02","SOC lead","First workflow outcome verified in the scenario."),
+ evt("ADOPT-03","sustain","2027-03-15","Customer Success","Repeatable workflow value confirmed."),
+ evt("EXP-01","brand","2027-03-19","Account Director","Second brand enters separate discovery.")
+];
+const stress=[
+ ...common,common[8],
+ evt("OLD-UPDATE","window","2026-11-06","CRM sync","Delayed confirmation."),
+ evt("CONCESSION-01","concede","2026-11-12","Account Director","Unapproved liability concession attempted."),
+ evt("LEG-03","legal","2026-12-09","Legal","Legal clears fallback terms. Earlier buyer sign-off has aged out."),
+ evt("FC-03","commit","2026-12-10","Account Director","Current buyer approval and signature timing are missing."),
+ evt("SLIP-01","slip","2026-12-12","Account Director","Forecast moves from Q4 FY26 to Q1 FY27.")
+];
+const manual=[
+ ["best","Move to Best Case","Account Director"],["redline","Inject liability redline","Client Legal"],
+ ["concede","Test unauthorized concession","Account Director"],["legal","Record Legal approval","Legal"],
+ ["buyer","Re-verify economic buyer","CISO"],["window","Confirm signature window","Procurement"],
+ ["approve","Approve current offer","Deal Desk"],["commit","Review for Commit","Account Director"],
+ ["sign","Advance / record signature","Authorized signer"],["slip","Move to next quarter","Account Director"],
+ ["calendar","Advance to Q1 FY27","Scenario clock"],["disqualify","Disqualify deal","Account Director"],["connect","Confirm integration connected","Customer Success"],["stall","Inject adoption stall","Customer Success"],
+ ["validate","Validate workflow","SOC lead"],["sustain","Verify sustained value","Customer Success"],
+ ["brand","Confirm second-brand sponsor","Account Director"]
+];
+const t=(headers,rows)=>'<table><thead><tr>'+headers.map(x=>'<th scope="col">'+x+'</th>').join("")+'</tr></thead><tbody>'+rows.map(row=>'<tr>'+row.map(x=>'<td>'+x+'</td>').join("")+'</tr>').join("")+'</tbody></table>';
+function evidenceRows(){
+ const pending="Pending";
+ return [
+  ["M · Metrics",s.pov?"Accepted":"Pending","SOC lead · disposition time on test set"],
+  ["E · Economic buyer",s.buyerDate?(freshEvidence(s.buyerDate,30)?"Verified":"Stale"):pending,"CISO · "+(s.buyerDate||"approval needed")],
+  ["D · Decision criteria",s.pov?"Met":"Pending","Solutions Engineering · proof-of-value criteria"],
+  ["D · Decision process",s.windowDate?(freshEvidence(s.windowDate,14)?"Confirmed":"Stale"):pending,"Procurement · "+(s.windowDate||"signature timing unverified")],
+  ["P · Paper process",s.terms==="redline"?"Redline":s.terms==="clear"?"Legal cleared":pending,"Legal / Deal Desk · offer "+(s.approved?"approved":"unapproved")],
+  ["I · Identify pain",s.discovery?"Confirmed":pending,"SOC lead · slow analyst disposition"],
+  ["C · Champion",s.champion?"Aligned":pending,"SOC lead · sponsor access and workflow owner"],
+  ["C · Competition",s.discovery?"Mapped":pending,"Account Director · incumbent workflow and status quo"]
+ ];
+}
+function decisionMemo(){
+ const p=price(),f=forecast(),issues=s.signed||s.disqualified?[]:gaps();
+ const next=s.disqualified?"Archive the reason and remove from active forecast.":s.signed?canExpand()?"Open separate discovery for the second brand.":s.recovery?"Assign a recovery owner and verify sustained workflow value.":"Verify first and sustained workflow outcomes with Customer Success.":issues.length?issues.join("; ")+".":f==="Commit"?"Execute the mutual action plan and record the signed agreement.":"Review for Commit against the verified evidence.";
+ return ["AURELIA GLOBAL FINANCIAL NETWORK | EXECUTIVE DEAL MEMO",
+  "Fictional scenario · As of "+s.date,
+  "Forecast: "+f+" · "+(s.disqualified?"Excluded":s.quarter),
+  "Term: "+s.term+" years · recurring concession: "+s.discount+"%",
+  "ARR: "+money(p.arr)+" · Services: "+money(p.services)+" · TCV: "+money(p.arr*s.term+p.services),
+  "Quota credit: "+money(s.signed?p.arr:0)+" earned"+(s.signed?" in "+s.quarter:!s.disqualified?" · "+money(p.arr)+" potential upon signature":""),
+  "Evidence: "+(s.pov?"SOC lead accepted proof of value.":"Proof of value pending.")+" "+(s.signed?"Signed agreement dated "+s.signedDate+".":s.disqualified?"Opportunity removed after funding withdrawal.":"Current gates: "+(issues.length?issues.join("; "):"all satisfied")+"."),
+  "Account Director decision: "+s.stageText+".",
+  "Next action: "+next,
+  "Expansion: "+(canExpand()?"Eligible for separate discovery; excluded from base deal.":s.signed?"Gated by verified adoption and a second-brand sponsor.":"Locked until signature.")
+ ].join("\n");
+}
+function metric(label,value,sub){return '<article class="metric"><div class="label">'+label+'</div><strong>'+value+'</strong><small>'+sub+'</small></article>';}
+function render(){
+ const f=forecast(),p=price(),benefit=s.cash-p.arr,yearCost=p.arr+p.services;
+ $("status").textContent=s.mode==="idle"?"Ready":playing?"Playing · "+cursor+"/"+script.length:cursor===script.length?"Replay complete":"Paused · "+cursor+"/"+script.length;
+ $("pause").textContent=playing?"Pause":"Resume";$("pause").disabled=cursor>=script.length;
+ $("next").disabled=cursor>=script.length;
+ $("headline").textContent=s.stageText;$("story").textContent=s.story;
+ $("announce").textContent=s.stageText+". Forecast "+f+".";
+ $("stages").innerHTML=stages.map((name,i)=>'<div'+(i===s.stage?' class="active" aria-current="step"':'')+'>0'+(i+1)+' · '+name+(i===4&&!s.signed?" · Locked":"")+'</div>').join("");
+ $("metrics").innerHTML=metric("Total contract value",money(p.arr*s.term+p.services),s.term+" years + one-time services")+
+  metric("Recurring ARR",money(p.arr),"Net after concession")+
+  metric("Quota credit",money(s.signed?p.arr:0),s.signed?"Earned · "+s.quarter:s.disqualified?"Excluded":money(p.arr)+" potential · illustrative plan")+
+  metric("Forecast",f,s.disqualified?"Removed from forecast":s.quarter);
+ $("discValue").textContent=s.discount+"%";$("discount").disabled=s.signed||s.disqualified;
+ $("term").disabled=s.signed||s.disqualified;
+ $("pricing").textContent=money(p.services)+" one-time professional services · "+(s.approved?"Current offer approved":"Current offer approval pending");
+ $("gate").innerHTML=s.notice?'<p class="callout">'+s.notice+'</p>':"";
+ $("evidence").innerHTML=t(["Evidence","Status","Owner / source"],evidenceRows());
+ const payback=benefit>0?(p.services/benefit*12).toFixed(1)+" months":"No positive payback";
+ $("roi").innerHTML=t(["Measure","Illustrative result"],[
+  ["Analyst capacity released",s.hours.toLocaleString("en-US")+" hours / year"],["Annual cash benefit",money(s.cash)],
+  ["First-year cash ROI",Math.round((s.cash-yearCost)/yearCost*100)+"%"],["Simple payback",payback]
+ ]);
+ $("log").innerHTML=s.audit.slice().reverse().map(a=>'<li><small>'+a.date+' · '+a.owner+'</small><br><strong>'+a.before+' → '+a.after+'</strong> '+(a.quarterBefore!==a.quarterAfter?' · '+a.quarterBefore+' → '+a.quarterAfter:'')+'<br>'+a.note+'</li>').join("")||'<li class="muted">Run a scenario to populate the audit.</li>';
+ $("actions").innerHTML=manual.filter(([type])=>s.signed?(s.connected?["stall","validate","sustain","brand"].includes(type):type==="connect"):!s.disqualified&&!["connect","stall","validate","sustain","brand"].includes(type)&&(type!=="calendar"||s.quarter===config.next&&s.date<"2027-01-04"))
+  .map(([type,label])=>'<button data-action="'+type+'">'+label+'</button>').join("");
+ $("post").hidden=!s.signed;
+ $("adoption").innerHTML=s.signed?t(["Milestone","Status"],[
+  ["Integration connected",s.connected?"Verified":"Pending"],["First workflow outcome",s.validated?"Validated":"Pending"],
+  ["Sustained value",s.recovery?"Recovery required":s.sustained?"Verified":"Pending"],
+  ["Second brand",canExpand()?"Eligible for separate discovery":"Locked"]
+ ]):"";
+ $("memo").textContent=decisionMemo();
+}
+function schedule(){
+ clearTimeout(timer);
+ if(playing)timer=setTimeout(advance,config.dwell);
+}
+function advance(){
+ if(cursor<script.length)apply(script[cursor++]);
+ if(cursor===script.length)playing=false;
+ render();schedule();
+}
+function reset(mode="idle"){
+ clearTimeout(timer);s=fresh();s.mode=mode;cursor=0;sequence=0;
+ script=mode==="executive"?executive:mode==="stress"?stress:[];
+ playing=Boolean(script.length);s.date=playing?common[0].date:"2026-11-10";
+ $("discount").value=s.discount;$("term").value=s.term;$("hours").value=s.hours;$("cash").value=s.cash;
+ if(playing)advance();else render();
+}
+let sequence=0;
+function manualEvent(type,owner,extra={}){
+ playing=false;clearTimeout(timer);
+ apply({...evt("MAN-"+(++sequence),type,s.date,owner,"Manual scenario action recorded."),...extra});
+ render();
+}
+function save(name,data,type){
+ const url=URL.createObjectURL(new Blob([data],{type}));
+ const a=document.createElement("a");a.href=url;a.download=name;document.body.append(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+$("play").addEventListener("click",()=>reset("executive"));
+$("stress").addEventListener("click",()=>reset("stress"));
+$("reset").addEventListener("click",()=>reset());
+$("pause").addEventListener("click",()=>{playing=!playing;render();schedule();});
+$("next").addEventListener("click",()=>{playing=false;advance();});
+$("actions").addEventListener("click",e=>{
+ const button=e.target.closest("[data-action]");if(!button)return;
+ const type=button.dataset.action;
+ const date=type==="calendar"?"2027-01-04":type==="connect"?new Date(Date.parse(s.signedDate)+91*86400000).toISOString().slice(0,10):s.date;
+ manualEvent(type,manual.find(a=>a[0]===type)[2],{date:date>s.date?date:s.date});
+ const replacement=$("actions").querySelector('[data-action="'+type+'"]');
+ if(replacement)replacement.focus();else $("manual").querySelector("summary").focus();
+});
+for(const [field,min,max] of [["discount",0,30],["term",1,5],["hours",0,1000000],["cash",0,1000000]]){
+ $(field).addEventListener(field==="discount"?"input":"change",e=>{
+  if(e.target.value===""){e.target.value=s[field];return;}
+  const value=Math.min(max,Math.max(min,Math.round(Number(e.target.value))));
+  if(!Number.isFinite(value)){e.target.value=s[field];return;}
+  e.target.value=value;
+  if(value!==s[field])manualEvent(field==="discount"||field==="term"?"price":"benefit","Reviewer",{field,value});
+ });
+}
+$("download").addEventListener("click",()=>save("aurelia-executive-memo.txt",decisionMemo(),"text/plain"));
+$("audit").addEventListener("click",()=>save("aurelia-deal-audit.json",JSON.stringify({fictional:true,mode:s.mode,date:s.date,forecast:forecast(),quarter:s.quarter,commercial:{...price(),term:s.term,discount:s.discount},adoption:{connected:s.connected,validated:s.validated,sustained:s.sustained,recovery:s.recovery,expansion:canExpand()},memo:decisionMemo(),audit:s.audit},null,2),"application/json"));
+reset();
+</script>
+</body></html>
